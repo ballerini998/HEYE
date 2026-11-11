@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fonti dei dati HEYE-DEEP</title>
+  <style>
+:root {
+  color-scheme: light;
+  --ink: #162b3b;
+  --muted: #435767;
+  --link: #095b65;
+  --line: #cbd9dd;
+  --paper: #fff;
+  --page: #f2f6f7;
+  --tint: #e9f2f2;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 1rem/1.6 system-ui, sans-serif; }
+main { width: min(100% - 2.5rem, 70rem); margin: 0 auto; padding: 3.5rem 0; }
+.hero { border-top: 5px solid var(--link); padding: 1.75rem 0 1.5rem; }
+h1, h2 { line-height: 1.17; margin: 0; }
+h1 { font-size: clamp(2rem, 5vw, 3.45rem); letter-spacing: -.04em; }
+.hero p { max-width: 68ch; margin: .8rem 0 0; color: var(--muted); }
+.datasets { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.dataset { background: var(--paper); border: 1px solid var(--line); border-radius: .75rem; padding: 1.25rem; display: flex; flex-direction: column; }
+.dataset h2 { font-size: 1.24rem; }
+code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+.identifier { display: inline-block; max-width: 100%; margin-top: .45rem; padding: .15rem .45rem; border-radius: .25rem; background: var(--tint); color: #244850; font-size: .83rem; }
+.dataset p { margin: .85rem 0 1.05rem; }
+a { color: var(--link); text-underline-offset: .15em; }
+a:hover { color: #113643; }
+a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 2px; }
+dl { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem 1rem; margin: auto 0 0; padding-top: .85rem; border-top: 1px solid var(--line); }
+dt { color: var(--muted); font-size: .82rem; font-weight: 700; }
+dd { margin: 0; }
+dd code { font-size: .85rem; }
+.note { margin: 1.1rem 0 2rem; border-left: 3px solid var(--link); padding: .75rem 1rem; background: var(--tint); color: var(--muted); }
+.python { background: var(--paper); border: 1px solid var(--line); border-radius: .75rem; padding: 1.25rem; }
+.section-title { font-size: 1.5rem; }
+.python p:last-child { margin-bottom: 0; }
+pre { margin: 1rem 0; padding: 1rem; border-radius: .5rem; background: #162b3b; color: #eff9fa; white-space: pre-wrap; overflow-wrap: anywhere; font-size: .88rem; line-height: 1.6; }
+@media (max-width: 46rem) {
+  main { width: min(100% - 1.5rem, 38rem); padding: 1.5rem 0 2rem; }
+  .datasets { grid-template-columns: 1fr; }
+}
+@media (max-width: 26rem) { dl { grid-template-columns: 1fr; } }
+@media print {
+  body { background: white; }
+  main { width: 100%; padding: 0; }
+  .datasets { grid-template-columns: 1fr 1fr; }
+  .dataset, pre { break-inside: avoid; }
+  pre { background: #f2f6f7; color: var(--ink); }
+}
+</style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <h1>Fonti dei dati HEYE-DEEP</h1>
+      <p>Scegli il dataset che ti serve. Ogni scheda collega la fonte ufficiale all’estratto nel progetto e al CSV già pronto per Python. Le annate indicate sono quelle dei file locali.</p>
+    </header>
+    <section class="datasets" aria-label="Dataset">
+      
+      <article class="dataset">
+        <header>
+          <h2>Popolazione residente</h2>
+          <code class="identifier">population_current_istat</code>
+        </header>
+        <p>In <strong>Area download</strong>, scegli i CSV per aree geografiche, regioni e province. Per ricostruire la serie locale servono Italia, Lombardia e provincia di Bergamo, 2019–2026, per sesso ed età puntuale. <a href="https://demo.istat.it/app/?i=POS&amp;l=it">ISTAT Demo – Popolazione residente</a></p>
+        <dl>
+          <div><dt>Estratto locale</dt><dd><a href="data/raw/01_popolazione_attuale_istat/istat_demo_ppc.csv"><code>istat_demo_ppc.csv</code></a></dd></div>
+          <div><dt>CSV pronto per Python</dt><dd><a href="data/processed/population_current.csv"><code>population_current.csv</code></a></dd></div>
+        </dl>
+      </article>
+      <article class="dataset">
+        <header>
+          <h2>Proiezioni demografiche</h2>
+          <code class="identifier">population_projections_istat</code>
+        </header>
+        <p>Scegli la popolazione prevista per sesso ed età, scenario mediano. Serie locale 2027–2050. Consulta la tavola regionale per Lombardia e Italia e quella provinciale per Bergamo. La tavola pubblica provinciale usa classi quinquennali, mentre l’estratto locale contiene età puntuali. <a href="https://demo.istat.it/app/?i=PPR&amp;l=it">ISTAT Demo – Previsioni regionali</a>, <a href="https://demo.istat.it/app/?i=PPC&amp;l=it">ISTAT Demo – Previsioni comunali e provinciali</a></p>
+        <dl>
+          <div><dt>Estratto locale</dt><dd><a href="data/raw/02_popolazione_proiettata_istat/istat_proj.csv"><code>istat_proj.csv</code></a></dd></div>
+          <div><dt>CSV pronto per Python</dt><dd><a href="data/processed/population_projections.csv"><code>population_projections.csv</code></a></dd></div>
+        </dl>
+      </article>
+      <article class="dataset">
+        <header>
+          <h2>Migrazioni</h2>
+          <code class="identifier">migration_istat</code>
+        </header>
+        <p>Cerca <strong>Trasferimenti di residenza</strong> e seleziona separatamente iscritti e cancellati. L’estratto usa Bergamo, Lombardia e Italia, 2018–2025, per sesso, cittadinanza, fasce 0–17 e 18–39, origine per gli iscritti e destinazione per i cancellati. Verifica che la tavola scelta contenga gli incroci necessari. <a href="https://demo.istat.it/tavole/?t=apr4">ISTAT Demo – Trasferimenti di residenza</a>, <a href="https://esploradati.istat.it/databrowser/#/it">IstatData</a></p>
+        <dl>
+          <div><dt>Estratto locale</dt><dd><a href="data/raw/03_migrazioni_istat/immigrati.csv"><code>immigrati.csv</code></a>, <a href="data/raw/03_migrazioni_istat/emigrati.csv"><code>emigrati.csv</code></a></dd></div>
+          <div><dt>CSV pronto per Python</dt><dd><a href="data/processed/migration_youth.csv"><code>migration_youth.csv</code></a></dd></div>
+        </dl>
+      </article>
+      <article class="dataset">
+        <header>
+          <h2>Disoccupazione</h2>
+          <code class="identifier">labour_market_unemployment_istat_lfs</code>
+        </header>
+        <p>Cerca <strong>Tasso di disoccupazione</strong> e usa le tavole annuali per classe di età, dati regionali per età e dati provinciali. Seleziona Italia, Lombardia e Bergamo, 2018–2025, per sesso e fascia d’età. <a href="https://esploradati.istat.it/databrowser/#/it/dw/categories/IT1,Z0500LAB,1.0">IstatData – Lavoro</a></p>
+        <dl>
+          <div><dt>Estratto locale</dt><dd><a href="data/raw/04_lavoro_giovanile_istat_lfs/disoccupazionetassi.csv"><code>disoccupazionetassi.csv</code></a></dd></div>
+          <div><dt>CSV pronto per Python</dt><dd><a href="data/processed/labour_market_youth.csv"><code>labour_market_youth.csv</code></a></dd></div>
+        </dl>
+      </article>
+      <article class="dataset">
+        <header>
+          <h2>Inattività</h2>
+          <code class="identifier">labour_market_inactivity_istat_lfs</code>
+        </header>
+        <p>Cerca <strong>Tasso di inattività</strong> e usa le tavole annuali per classe di età, dati regionali e dati provinciali. Seleziona Italia, Lombardia e Bergamo, 2018–2025, per sesso e fascia d’età. <a href="https://esploradati.istat.it/databrowser/#/it/dw/categories/IT1,Z0500LAB,1.0">IstatData – Lavoro</a></p>
+        <dl>
+          <div><dt>Estratto locale</dt><dd><a href="data/raw/04_lavoro_giovanile_istat_lfs/inattivitassi.csv"><code>inattivitassi.csv</code></a></dd></div>
+          <div><dt>CSV pronto per Python</dt><dd><a href="data/processed/inactivity_youth.csv"><code>inactivity_youth.csv</code></a></dd></div>
+        </dl>
+      </article>
+      <article class="dataset">
+        <header>
+          <h2>BesT Lombardia</h2>
+          <code class="identifier">bes_best_istat</code>
+        </header>
+        <p>Scarica il rapporto Lombardia 2025. Il CSV locale contiene gli indicatori delle tavole del rapporto e la pagina PDF di provenienza. <a href="https://www.istat.it/wp-content/uploads/2025/12/BesT2025_Lombardia.pdf">ISTAT – PDF BesT 2025 Lombardia</a></p>
+        <dl>
+          <div><dt>Estratto locale</dt><dd><a href="data/raw/05_bes_best_istat/BesT2025_Lombardia.pdf"><code>BesT2025_Lombardia.pdf</code></a></dd></div>
+          <div><dt>CSV pronto per Python</dt><dd><a href="data/processed/bes_best_indicators.csv"><code>bes_best_indicators.csv</code></a></dd></div>
+        </dl>
+      </article>
+      <article class="dataset">
+        <header>
+          <h2>Immatricolati all’università</h2>
+          <code class="identifier">university_mur_ustat</code>
+        </header>
+        <p>Scarica <strong>Immatricolati per ateneo</strong> e seleziona anno accademico e sesso. Il file locale copre 2014/15–2024/25 e raggruppa gli atenei in Bergamo, Altro Lombardia e Altro Italia. <a href="https://dati-ustat.mur.gov.it/dataset/immatricolati/resource/14938cd2-7683-4fff-b5e0-0741402a0dd2">MUR USTAT – Immatricolati per ateneo</a></p>
+        <dl>
+          <div><dt>Estratto locale</dt><dd><a href="data/raw/06_universita_mur_ustat/immatricolati.csv"><code>immatricolati.csv</code></a></dd></div>
+          <div><dt>CSV pronto per Python</dt><dd><a href="data/processed/university_pipeline.csv"><code>university_pipeline.csv</code></a></dd></div>
+        </dl>
+      </article>
+    </section>
+    <p class="note">I link ricostruiscono il percorso alle fonti. Per gli estratti CSV locali, il progetto documenta fonte e copertura, mentre le query originali di esportazione non sono registrate. Le edizioni online possono avere annate, colonne o aggregazioni diverse.</p>
+    <section class="python" aria-labelledby="python">
+      
+
+
+
+<h2 class="section-title" id="python">Aprire solo i dataset scelti in Python</h2>
+<p>Dalla cartella <code>HEYE</code>, copia in <code>scelti</code> gli ID dei dataset che ti servono. Il codice legge dal <a href="data/catalog/dataset_status_tracker.csv">catalogo locale</a> i percorsi e apre solo quei CSV.</p>
+<pre><code class="language-python">import pandas as pd
+
+scelti = ["labour_market_unemployment_istat_lfs", "population_current_istat"]
+catalogo = pd.read_csv("data/catalog/dataset_status_tracker.csv", index_col="dataset_id")
+dati = {nome: pd.read_csv(catalogo.at[nome, "file_processed"]) for nome in scelti}
+</code></pre>
+<p>Per una nuova estrazione puoi passare direttamente il CSV scaricato a <code>pd.read_csv()</code>. Se vuoi usarlo anche nella dashboard, armonizza prima colonne, unità e codici con lo schema dei CSV locali, consultabile in <strong>Dati e metodi → File dati caricati</strong>. Per il PDF BesT puoi partire dal CSV già estratto.</p>
+
+    </section>
+  </main>
+</body>
+</html>
